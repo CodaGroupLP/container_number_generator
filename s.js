@@ -1,9 +1,17 @@
+
+
+
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const numbers = '1234567890'
 let validator = new ContainerValidator()
 let txtPrefix = document.getElementById("txtPrefix")
 let alertPlaceholder = document.getElementById('liveAlertPlaceholder')
 let mySpinner = document.querySelector('.my-spinner')
+let txtContainerList = document.getElementById('txtContainerList')
+
+chrome.storage.sync.get(['container_numbers'], (result) => {
+    txtContainerList.value = result.container_numbers.toLocaleString().replaceAll(',','\n')
+})
 
 
 function _randomContainerNumber(){
@@ -55,6 +63,8 @@ function generateContainerButtonFunc(numbers) {
     for (let i = 0; i < numbers; i++) {
         result.push(generateContainerNumber())
     }
+
+    chrome.storage.sync.set({'container_numbers': result})
     return result
 }
 
@@ -127,4 +137,5 @@ document.getElementById('btnClear').onclick = () => {
     document.querySelector("input[type='number']").value = 1;
     document.getElementById('txtContainerList').value = ''
     txtPrefix.value = '';
+    chrome.storage.sync.set({'container_numbers': []})
 }
