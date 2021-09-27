@@ -1,0 +1,21 @@
+.container {
+    width: 300px;
+}
+
+.toUppercase {
+    text-transform: uppercase;
+}
+
+.list-portion {
+    position: relative;
+}
+
+#txtContainerList {
+    height: 200px;
+}
+
+.my-spinner {
+    height: 100px;
+    position: absolute;
+    display: none;
+}

@@ -1,0 +1,13 @@
+{
+    "name": "Container Generator",
+    "description": "Generate freight container numbers",
+    "version": "1.0",
+    "manifest_version": 3,
+    "background":{
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "s.html"
+    },
+    "permissions": ["storage"]
+}
