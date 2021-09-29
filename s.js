@@ -1,16 +1,16 @@
-
-
-
 const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const numbers = '1234567890'
 let validator = new ContainerValidator()
 let txtPrefix = document.getElementById("txtPrefix")
 let alertPlaceholder = document.getElementById('liveAlertPlaceholder')
-let mySpinner = document.querySelector('.my-spinner')
 let txtContainerList = document.getElementById('txtContainerList')
+const btnGenerate = document.querySelector('#btnGenerate')
+
 
 chrome.storage.sync.get(['container_numbers'], (result) => {
-    txtContainerList.value = result.container_numbers.toLocaleString().replaceAll(',','\n')
+    if(result.container_numbers ){
+        txtContainerList.value = result.container_numbers.toLocaleString().replaceAll(',','\n')
+    }
 })
 
 
@@ -78,35 +78,6 @@ function alert(message, type) {
     alertPlaceholder.append(wrapper)
   }
 
-function spinner() {
-    let wrapper = document.createElement('div')
-    wrapper.innerHTML = `<div class="text-center" id="spinner">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>`
-
-    mySpinner.append(wrapper)
-    
-}
-
-const btnGenerate = document.querySelector('#btnGenerate')
-
-// btnGenerate.onclick = () => {
-//     try{
-//         document.getElementById('txtContainerList').value = ''
-//         mySpinner.style.display = 'block'
-//         document.getElementById('txtContainerList').value = generateContainerButtonFunc(parseInt(document.getElementById("txtNumber").value)).toLocaleString().replaceAll(',','\n')
-       
-            
-        
-//     }catch (error){
-//         console.error(error)
-//         alert(`Oopsie!. ${error.message}`, 'danger')
-//     }finally{
-//         mySpinner.style.display = 'none';
-//     }
-// }
-
 let generate = async () => {
 
     let response =  await generateContainerButtonFunc(parseInt(document.getElementById("txtNumber").value)).toLocaleString().replaceAll(',','\n')
@@ -119,7 +90,7 @@ let generate = async () => {
 
 btnGenerate.onclick = () => {
     document.getElementById('txtContainerList').value = ''
-    mySpinner.style.display = 'block';
+    // mySpinner.style.display = 'block';
     generate()
         .then((resp) => {
             document.getElementById('txtContainerList').value = resp
@@ -129,7 +100,7 @@ btnGenerate.onclick = () => {
             alert(`Oopsie!. ${error.message}`, 'danger')
         })
         .finally(() => {
-            mySpinner.style.display = 'none';
+            // mySpinner.style.display = 'none';
         })
 }
 
@@ -139,3 +110,19 @@ document.getElementById('btnClear').onclick = () => {
     txtPrefix.value = '';
     chrome.storage.sync.set({'container_numbers': []})
 }
+
+
+let tooltip = document.getElementById('myTooltip')
+let btnCopy = document.getElementById('btnCopy')
+
+btnCopy.onclick = () => {
+    tooltip.style.fontSize = '13px'
+    tooltip.innerHTML = "Copied"
+    navigator.clipboard.writeText(txtContainerList.value)
+}
+
+btnCopy.onmouseout = () => {
+    tooltip.style.fontSize = '1rem'
+    tooltip.innerHTML = "Copy"
+}
+
