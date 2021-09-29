@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="s.css">
-    <link rel="stylesheet" href="scss/style.css">
     <title>Document</title>
 </head>
 <body>
@@ -35,24 +34,27 @@
                     <span class="heelo">GENERATE</span>
                 </button>
                 <button type="button" id="btnClear" class="btn btn-outline-secondary btn-sm">RESET</button>
+                
             </div>
         </div>
         <div class="row mt-2 mb-2 list-portion">
             <div class="col-sm form-floating ahem">
                 <textarea id="txtContainerList" class="form-control">
                 </textarea>
-                <label for="floatingTextarea2">Container Numbers</label>
+                <label for="floatingTextarea2">
+                    Container Numbers
+                </label>
             </div>
-            <div class="my-spinner pt-5 mt-4">
-                <div class="text-center" id="spinner">
-                    <div class="spinner-border" role="status">
-                      <span class="visually-hidden">Loading...</span>
-                    </div>`
+            <div class="col mr-2 copy">
+                <button class="btn p-0 mr-2 tooltipx" id="btnCopy" type="button">
+                    <span class="tooltiptext" id="myTooltip">Copy</span>
+                    <img src="/bootstrap/img/clipboard.svg" width="16" height="16">
+                  </button>      
             </div>
         </div>
     </div>
-    <script src="resources/jquery-3.2.1.slim.js"></script>
-    <script src="resources/popper.min.js"></script>
+    <script src="bootstrap/js/jquery-3.6.0.min.js"></script>
+    <!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="ContainerValidator.js"></script>
     <script type="text/javascript" src="s.js"></script>
